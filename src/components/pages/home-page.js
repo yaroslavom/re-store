@@ -2,6 +2,6 @@ import React from "react"
 import BookList from "../book-list/book-list"
 
 const HomePage = () => {
-    return <div><BookList books={[]}/></div>
+    return <BookList/>
 }
 export default HomePage;
