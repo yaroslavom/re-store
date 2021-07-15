@@ -1,0 +1,9 @@
+.error-boundry {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.error-img {
+    max-width: 500px;
+}

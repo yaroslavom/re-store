@@ -1,26 +1,17 @@
-import React, { Component } from "react";
-import Spinner from "../spinner/spinner";
-import ErrorIndicator from "../error-indicator/error-indicator";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import HomePage from "../pages/home-page";
+import CartPage from "../pages/cart-page";
 
-export default class App extends Component {
-  state = {
-    hasError: false,
-  };
+const App = () => {
+  return (
 
-  componentDidCatch() {
-    console.log("componentDidCatch");
-    this.setState({ hasError: true });
-  }
+      <Switch>
+        <Route path="/" component={HomePage} exact/>
+        <Route path="/cart" component={CartPage} />
+      </Switch>
 
-  render() {
-    if (this.state.hasError) {
-      return <ErrorIndicator />;
-    }
+  );
+};
 
-    return (
-      <div className="re-store">
-        <Spinner />
-      </div>
-    );
-  }
-}
+export default App;
