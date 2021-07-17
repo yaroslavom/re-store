@@ -6,7 +6,7 @@ const ErrorIndicator = () => {
   return (
     <div className="error-boundry">
       <img src={ErrorImg} alt="404" className="error-img"/>
-      <p>Sorry we can't find that page!</p>
+      <span className="error-title">Sorry, we can't find this page!</span>
     </div>
   );
 };
