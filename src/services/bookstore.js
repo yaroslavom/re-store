@@ -9,7 +9,7 @@ export default class BookstoreService {
         "https://learning.oreilly.com/library/cover/9781491965962/250w/",
     },
     {
-      Id: 2,
+      id: 2,
       title: "Release It",
       author: "Michael T. Nygard",
       price: 45,

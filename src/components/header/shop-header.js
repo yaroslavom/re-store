@@ -6,7 +6,7 @@ const ShopHeader = ({ numItems, total }) => {
   return (
     <header className="shop-header">
       <Link to="/" className="text-decoration-none">
-        <div className="logo text-dark" href="#">
+        <div className="logo text-dark">
           ReStore
         </div>
       </Link>
