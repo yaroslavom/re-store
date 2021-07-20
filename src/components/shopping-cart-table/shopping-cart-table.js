@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { bookAddedToCart, bookDeletedFromCart, allBooksDeletedFromCart} from "../../actions/actions";
 import "./shopping-cart-table.css";
 
 const ShoppingCartTable = ({
@@ -61,25 +62,17 @@ const ShoppingCartTable = ({
   );
 };
 
-const mapStateToProps = ({ cartItems: items,
-  orderTotal: total}) => {
+const mapStateToProps = ({ cartItems: items, orderTotal: total }) => {
   return {
-    total, items 
-  }
+    total,
+    items,
+  };
 }; //Деструктурирующее присваивание
 
-const mapDispatchToProps = () => {
-  return {
-    onIncrease: (id) => {
-    console.log(`Increase ${id}`);
-  },
-  onDecrease: (id) => {
-    console.log(`Decrease ${id}`);
-  },
-  onDelete: (id) => {
-    console.log(`Delete ${id}`);
-  }
-}
-}
+const mapDispatchToProps = {
+  onIncrease: bookAddedToCart,
+  onDecrease: bookDeletedFromCart,
+  onDelete: allBooksDeletedFromCart
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable);
