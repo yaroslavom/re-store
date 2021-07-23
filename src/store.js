@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware} from "redux";
+import thunkMiddleware from 'redux-thunk'
 import reducer from "./reducers/reducer";
 
 const logMiddleware = ({getState}) => (next) => (action) => {
@@ -13,12 +14,12 @@ const stringMiddleware = (state) => (dispatch) => (action) => {
     return dispatch(action)
 }
 
-// applyMiddleware - виконує функцію connect
-// В Middleware, state може приймати тільки getState і dispatch
-// next теж що і dispatch, позначається як наступний етап
+const store = createStore(reducer, applyMiddleware(thunkMiddleware, stringMiddleware, logMiddleware))
 
-const store = createStore(reducer, applyMiddleware(stringMiddleware, logMiddleware))
+const delayedActionCreator = (timeout) => (dispatch) => {
+    setTimeout(()=> dispatch({type: "DELAYED_ACTION"}), 2000)
+}
 
-store.dispatch('HELLO_WORLD')
+store.dispatch(delayedActionCreator(3000))
 
 export default store;
