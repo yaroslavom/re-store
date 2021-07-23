@@ -1,31 +1,23 @@
-import { createStore, compose } from "redux";
+import { createStore, applyMiddleware} from "redux";
 import reducer from "./reducers/reducer";
 
-const stringEnhancer = (createStore) => (...args) => {
-    const store = createStore(...args)
-    const originalDispatch = store.dispatch;
-    store.dispatch = (action) => {
-        if(typeof action === 'string') {
-            return originalDispatch({type: action})
-        }
-        return originalDispatch(action)
-    }
-
-    return store
+const logMiddleware = ({getState}) => (next) => (action) => {
+    console.log(action.type, getState());
+    return next(action)
 }
 
-const logEnhancer = (createStore) => (...args) => {
-    const store = createStore(...args)
-    const originalDispatch = store.dispatch;
-    store.dispatch = (action) => {
-        console.log(action.type);
-        return originalDispatch(action)
+const stringMiddleware = (state) => (dispatch) => (action) => {
+    if(typeof action === 'string') {
+        return dispatch({type: action})
     }
-
-    return store
+    return dispatch(action)
 }
 
-const store = createStore(reducer, compose(stringEnhancer, logEnhancer))
+// applyMiddleware - виконує функцію connect
+// В Middleware, state може приймати тільки getState і dispatch
+// next теж що і dispatch, позначається як наступний етап
+
+const store = createStore(reducer, applyMiddleware(stringMiddleware, logMiddleware))
 
 store.dispatch('HELLO_WORLD')
 
